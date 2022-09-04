@@ -4,13 +4,19 @@ import android.content.ClipData;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.onlineshoppingapp.ui.gallery.GalleryFragment;
+import com.example.onlineshoppingapp.ui.slideshow.SlideshowFragment;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.NonNull;
+import androidx.core.view.GravityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -23,7 +29,7 @@ import com.example.onlineshoppingapp.databinding.ActivityHomeBinding;
 public class HomeActivity extends AppCompatActivity {
 
     TextView name,email;
-   ;
+
 
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -80,5 +86,38 @@ public class HomeActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_home);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if(id == R.id.nav_home)
+        {
+
+        }
+        else if(id==R.id.nav_slideshow)
+        {
+            Intent cartIntent = new Intent(HomeActivity.this, SlideshowFragment.class);
+            startActivity(cartIntent);
+
+        }
+        else if(id==R.id.nav_gallery)
+        {
+            Intent aboutIntent = new Intent(HomeActivity.this, GalleryFragment.class);
+            startActivity(aboutIntent);
+        }
+         else if(id==R.id.nav_signout)
+        {
+
+            Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        }
+
+
+
+       return super.onOptionsItemSelected(item);
     }
 }
